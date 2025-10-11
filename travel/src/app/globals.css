@@ -120,3 +120,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: rgb(249, 115, 22) !important;
+}

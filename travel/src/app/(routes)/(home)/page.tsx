@@ -1,9 +1,12 @@
-import React from 'react'
+import RecentProduct from "@/components/layout/recent/RecentProduct";
+import React from "react";
 
 function Home() {
   return (
-    <div>Home</div>
-  )
+    <div>
+      <RecentProduct />
+    </div>
+  );
 }
 
 export default Home;

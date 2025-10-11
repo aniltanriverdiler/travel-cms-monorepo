@@ -2,7 +2,6 @@
 import {
   Facebook,
   Instagram,
-  Menu,
   MessageCircle,
   Phone,
   Search,
@@ -13,6 +12,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { lazy } from "react";
+import MobileMenu from "./MobileMenu";
+import { navigationLinks } from "@/constans";
+import SearchPage from "./SearchPage";
 
 function Header() {
   const pathname = usePathname();
@@ -21,15 +23,6 @@ function Header() {
     { href: "#", icon: <Facebook size={16} /> },
     { href: "#", icon: <Twitter size={16} /> },
     { href: "#", icon: <Instagram size={16} /> },
-  ];
-
-  const navigationLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/hotels", label: "Hotel" },
-    { href: "/trips", label: "Trip" },
-    { href: "/rent-a-cars", label: "Rent a car" },
-    { href: "/contact", label: "Contact" },
   ];
 
   //const { data: session, status } = useSession();
@@ -91,15 +84,11 @@ function Header() {
             ))}
           </nav>
           <div className="flex items-center space-x-4">
-            <div className="p-3 hidden lg:flex bg-orange-500 cursor-pointer text-white rounded-full">
-              <Search />
-            </div>
-            <div className="p-3 bg-orange-500 cursor-pointer text-white rounded-full">
-              <Menu />
-            </div>
+            <SearchPage />
             <div className="p-3 bg-sky-400 cursor-pointer text-white rounded-full">
               <User />
             </div>
+            <MobileMenu />
           </div>
         </div>
       </div>

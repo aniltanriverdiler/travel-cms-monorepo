@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { navigationLinks } from "@/constans";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,15 +11,6 @@ function Footer() {
     { href: "#", icon: <Facebook size={16} /> },
     { href: "#", icon: <Twitter size={16} /> },
     { href: "#", icon: <Instagram size={16} /> },
-  ];
-
-  const navigationLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/hotels", label: "Hotel" },
-    { href: "/trips", label: "Trip" },
-    { href: "/rent-a-cars", label: "Rent a car" },
-    { href: "/contact", label: "Contact" },
   ];
 
   const instagramImages = Array.from(

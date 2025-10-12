@@ -102,23 +102,23 @@ export const packages = [
 export const slides = [
   {
     image: "/slider/1.png",
-    title: "Uncovering Stories, One Trip At A Time ",
+    title: "Uncovering Stories, One Trip At A Time",
     description:
-      "Cras ultricies ligula sed magna dictum porta. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.",
+      "Every journey tells a story. Discover hidden gems, book cozy hotels, and rent the perfect car to make your adventure unforgettable.",
     buttonText: "READ MORE",
   },
   {
     image: "/slider/2.png",
     title: "Explore The World, One Destination At A Time",
     description:
-      "Nulla porttitor accumsan tincidunt. Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus.",
+      "Plan your next getaway with ease — from hotel reservations to car rentals, everything you need for seamless travel is right here.",
     buttonText: "DISCOVER NOW",
   },
   {
     image: "/slider/3.png",
-    title: "Find Your Next Adventure Explore The World",
+    title: "Find Your Next Adventure, Explore The World",
     description:
-      "Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.",
+      "Turn your travel dreams into reality. Compare destinations, reserve hotels, and rent cars all in one place — start your journey today.",
     buttonText: "START YOUR JOURNEY",
   },
 ];

@@ -11,6 +11,7 @@ function RouteLayout({ children }: RouteLayoutProps) {
     <div>
       <Header />
       <div className="min-h-screen">{children}</div>
+      <div className="min-h-64"></div>
       <Footer />
     </div>
   );

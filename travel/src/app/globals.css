@@ -41,6 +41,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-move-dot: move-dot 6s infinite linear;
 }
 
 :root {
@@ -119,6 +120,12 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes move-dot {
+  0% { left: 0%; }
+  50% { left: 100%; }
+  100% { left: 0%; }
 }
 
 .swiper-button-next,

@@ -55,7 +55,7 @@ function WelcomeSection() {
             whileTap={{ scale: 0.9, rotate: -10 }}
             whileHover={{ scale: 1.1, rotate: 5 }}
           >
-            <Button className="bg-orange-500 text-white py-6 px-8 rounded-lg hover:bg-orange-600 transition">
+            <Button className="bg-orange-500 text-white py-6 px-8 rounded-lg hover:bg-orange-600 transition cursor-pointer">
               Browse
             </Button>
           </motion.div>

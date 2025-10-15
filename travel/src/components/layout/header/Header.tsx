@@ -4,14 +4,13 @@ import {
   Instagram,
   MessageCircle,
   Phone,
-  Search,
   Twitter,
   User,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { lazy } from "react";
+import React from "react";
 import MobileMenu from "./MobileMenu";
 import { navigationLinks } from "@/constans";
 import SearchPage from "./SearchPage";
@@ -73,11 +72,7 @@ function Header() {
               <Link
                 key={index}
                 href={link.href}
-                className={`${
-                  pathname === link.href
-                    ? "text-orange-500"
-                    : "hover:text-orange-500"
-                }`}
+                className={`${pathname === link.href ? "text-orange-500" : "hover:text-orange-500"}`}
               >
                 {link.label}
               </Link>

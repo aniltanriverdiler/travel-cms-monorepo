@@ -1,9 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@prisma/client";
 
 declare global {
   var prisma: PrismaClient | undefined;
+}
+
+export const getPrisma = async (): Promise<PrismaClient> => {
+  if (!globalThis.prisma) {
+    const { PrismaClient } = await import("@prisma/client");
+    globalThis.prisma = new PrismaClient();
+  }
+  return globalThis.prisma;
 };
-
-export const prismadb = globalThis.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV ! == "production") globalThis.prisma = prismadb;

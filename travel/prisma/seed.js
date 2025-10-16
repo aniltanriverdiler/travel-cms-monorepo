@@ -11,7 +11,7 @@ function getHotelImages(hotelFolder) {
   return fs
     .readdirSync(hotelPath)
     .filter((file) => file.endsWith(".jpg"))
-    .map((file) => `/public/${hotelFolder}/${file}`);
+    .map((file) => `/${hotelFolder}/${file}`);
 }
 
 function getRandomPrice(min, max) {

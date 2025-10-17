@@ -32,7 +32,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState("");
-  const [success, setSucces] = useState("");
+  const [success, setSuccess] = useState("");
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -45,8 +45,34 @@ function RegisterPage() {
     },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
+  const onSubmit = async (data: RegisterFormValues) => {
+    setError("");
+    setSuccess("");
+
     console.log(data);
+
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok === false) {
+        const text = await response.text();
+        const result = text ? JSON.parse(text) : {};
+        setError(result.message || "Registration failed.");
+      }
+
+      if (response.ok === true) {
+        setSuccess("Successful.");
+        setTimeout(() => {
+          router.push("/login");
+        }, 4000);
+      }
+    } catch (error) {
+      setError(error.message || "An unexpected error occurred");
+    }
   };
 
   return (
@@ -127,7 +153,9 @@ function RegisterPage() {
             </div>
 
             <div className="flex flex-row items-center justify-between">
-              <Button type="submit" className="cursor-pointer">Register</Button>
+              <Button type="submit" className="cursor-pointer">
+                Register
+              </Button>
 
               <Link
                 className="font-bold text-sm text-blue-500 hover:text-blue-800"

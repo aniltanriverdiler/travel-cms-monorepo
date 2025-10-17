@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type Hotel = {
   id: string;
@@ -35,10 +36,13 @@ const filterSchema = z.object({
 
 type FilterValues = z.infer<typeof filterSchema>;
 
-function HotelList() {
+function TripList() {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const form = useForm<FilterValues>({
     resolver: zodResolver(filterSchema),
@@ -59,9 +63,7 @@ function HotelList() {
     if (filters.priceMin) params.append("priceMin", filters.priceMin);
     if (filters.priceMax) params.append("priceMax", filters.priceMax);
 
-    if (params.toString()) {
-      url += "?" + params.toString();
-    }
+    url += "?" + params.toString();
 
     fetch(url)
       .then((res) => res.json())
@@ -76,17 +78,28 @@ function HotelList() {
   };
 
   useEffect(() => {
-    fetchHotels();
-  }, []);
+    const filters: FilterValues = {
+      rating: searchParams.get("rating") || "",
+      priceMin: searchParams.get("priceMin") || "",
+      priceMax: searchParams.get("priceMax") || "",
+    };
+
+    form.reset(filters);
+    fetchHotels(filters);
+  }, [searchParams]);
 
   function onSubmit(values: FilterValues) {
-    fetchHotels(values);
-    console.log(values);
+    const params = new URLSearchParams();
+    if (values.rating) params.set("rating", values.rating);
+    if (values.priceMin) params.set("priceMin", values.priceMin);
+    if (values.priceMax) params.set("priceMax", values.priceMax);
+
+    router.push(`/trips?${params.toString()}`);
   }
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Hotels</h1>
+      <h1 className="text-2xl font-bold mb-4">Hotels UseSearchParams</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -191,4 +204,4 @@ function HotelList() {
   );
 }
 
-export default HotelList;
+export default TripList;

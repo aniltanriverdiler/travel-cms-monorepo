@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const loginSchema = z.object({
   email: z
@@ -89,7 +90,9 @@ function LoginPage() {
               )}
             />
             <div className="flex flex-row items-center justify-between">
-              <Button type="submit" className="cursor-pointer">Login</Button>
+              <Button type="submit" className="cursor-pointer">
+                Login
+              </Button>
 
               <Link
                 className="font-bold text-sm text-blue-500 hover:text-blue-800"

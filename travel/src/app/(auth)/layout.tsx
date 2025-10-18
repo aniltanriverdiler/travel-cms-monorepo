@@ -1,8 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -10,6 +12,25 @@ interface AuthLayoutProps {
 
 function AuthLayout({ children }: AuthLayoutProps) {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
+
+  if (status === "loading") {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 size={48} className="animate-spin" />
+      </div>
+    );
+  }
+
+  if (session) {
+    return null;
+  }
 
   return (
     <div>

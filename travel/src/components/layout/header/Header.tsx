@@ -6,6 +6,7 @@ import {
   Phone,
   Twitter,
   User,
+  UserPlus,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import React from "react";
 import MobileMenu from "./MobileMenu";
 import { navigationLinks } from "@/constans";
 import SearchPage from "./SearchPage";
+import { useSession } from "next-auth/react";
 
 function Header() {
   const pathname = usePathname();
@@ -24,7 +26,7 @@ function Header() {
     { href: "#", icon: <Instagram size={16} /> },
   ];
 
-  //const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <header className="bg-black text-white">
@@ -80,12 +82,21 @@ function Header() {
           </nav>
           <div className="flex items-center space-x-4">
             <SearchPage />
-            <Link
-              href="/login"
-              className="p-3 bg-sky-400 cursor-pointer text-white rounded-full"
-            >
-              <User />
-            </Link>
+            {session ? (
+              <Link
+                href="/profile"
+                className="p-3 bg-red-400 cursor-pointer text-white rounded-full"
+              >
+                <UserPlus />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="p-3 bg-sky-400 cursor-pointer text-white rounded-full"
+              >
+                <User />
+              </Link>
+            )}
             <MobileMenu />
           </div>
         </div>

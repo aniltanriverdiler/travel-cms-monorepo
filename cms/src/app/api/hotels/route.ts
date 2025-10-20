@@ -35,7 +35,7 @@ export async function GET(request: Request) {
   const name = searchParams.get("name");
   const pageStr = searchParams.get("page") || "1";
   const page = Number(pageStr);
-  const limit = 5;
+  const limit = 10;
   const skip = (page - 1) * limit;
 
   const filters = [];

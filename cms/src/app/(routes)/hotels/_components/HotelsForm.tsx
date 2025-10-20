@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useHotelStore } from '@/stores/useHotelStore'
 
 const hotelFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -32,6 +33,8 @@ const hotelFormSchema = z.object({
 });
 
 function HotelsForm() {
+  const { fetchHotels } = useHotelStore();
+
   const form = useForm<z.infer<typeof hotelFormSchema>>({
     resolver: zodResolver(hotelFormSchema),
     defaultValues: {
@@ -68,8 +71,9 @@ function HotelsForm() {
         throw new Error("Failed to add hotel");
       }
 
-      console.log("Hotel added successfuly");
+      console.log("Hotel added successfully");
       form.reset();
+      fetchHotels();
 
     } catch (error) {
       console.log("Error adding hotel:", error);

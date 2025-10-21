@@ -1,4 +1,5 @@
 import { getPrisma } from "@/lib/db";
+import { error } from "console";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -74,6 +75,51 @@ export async function GET(request: Request) {
   } catch (error) {
     return NextResponse.json(
       { error: "Something went wrong!" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const prisma = getPrisma();
+    const body = await request.json();
+    const {
+      id,
+      name,
+      description,
+      location,
+      address,
+      rating,
+      photos,
+      pricePerNight,
+    } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Hotel 'id' is required." },
+        { status: 400 }
+      );
+    }
+
+    const updatedHotel = await prisma.hotel.update({
+      where: { id },
+      data: {
+        name,
+        description,
+        location,
+        address,
+        rating,
+        photos,
+        pricePerNight,
+      },
+    });
+
+    return NextResponse.json(updatedHotel);
+  } catch (error) {
+    console.error("PUT error", error);
+    return NextResponse.json(
+      { error: "Something went wrong while updating the hotel!" },
       { status: 500 }
     );
   }

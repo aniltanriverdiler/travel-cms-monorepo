@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import {
   ColumnDef,
@@ -13,17 +12,13 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -36,6 +31,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Hotel, useHotelStore } from "@/stores/useHotelStore";
+import EditHotelForm from "./EditHotelForm";
+import ActionCell from "./ActionCell";
 
 export const baseColumns: ColumnDef<Hotel>[] = [
   {
@@ -96,7 +93,7 @@ export function HotelTable() {
     setIsEditDialogOpen(true);
   };
 
-  /*   const columns = React.useMemo<ColumnDef<Hotel>[]>(() => {
+  const columns = React.useMemo<ColumnDef<Hotel>[]>(() => {
     return [
       ...baseColumns,
       {
@@ -112,11 +109,11 @@ export function HotelTable() {
         },
       },
     ];
-  }, []); */
+  }, []);
 
   const table = useReactTable({
     data: hotels,
-    columns: baseColumns,
+    columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -247,6 +244,11 @@ export function HotelTable() {
           </Button>
         </div>
       </div>
+      <EditHotelForm
+        open={isEditDialogOpen}
+        onOpenChange={setIsEditDialogOpen}
+        initialHotel={selectedHotel}
+      />
     </div>
   );
 }

@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useHotelStore } from '@/stores/useHotelStore'
+import { useHotelStore } from "@/stores/useHotelStore";
 
 const hotelFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -49,14 +49,14 @@ function HotelsForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof hotelFormSchema>) => {
-     const hotelData = {
+    const hotelData = {
       name: values.name,
       description: values.description,
       location: values.location,
       address: values.address,
       rating: values.rating || 0,
       pricePerNight: values.pricePerNight,
-     }
+    };
 
     try {
       const response = await fetch("/api/hotels", {
@@ -66,21 +66,19 @@ function HotelsForm() {
         },
         body: JSON.stringify(hotelData),
       });
-      
-      if(!response.ok) {
+
+      if (!response.ok) {
         throw new Error("Failed to add hotel");
       }
 
       console.log("Hotel added successfully");
       form.reset();
       fetchHotels();
-
     } catch (error) {
       console.log("Error adding hotel:", error);
     }
 
     console.log(values);
-
   };
 
   return (
@@ -171,7 +169,9 @@ function HotelsForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Add Hotel</Button>
+        <Button className="cursor-pointer" type="submit">
+          Add Hotel
+        </Button>
       </form>
     </Form>
   );
